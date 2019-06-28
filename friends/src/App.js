@@ -5,21 +5,41 @@ import Component from './component'
 import Login from './Login'
 import FriendsList from './FriendsList'
 import PrivateRoute from './PrivateRoute'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import DeleteFriend from './DeleteFriend'
 
-function App() {
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+
+export default class App extends React.Component {
+    state = {
+      collapsed: true,
+    }
+
+  toggleNavbar = event => {
+    this.setState({
+      collapsed: !this.state.collapsed
+    });
+  }
+  render() {
   return (
     <div className="App">
-      <header className="App-header">
-        <Link to="/">Home</Link>
-        <Link to="/friendslist">Friends list</Link>
-        <Link to="/login">Login</Link>
-      </header>
+        <Navbar color="danger" light>
+          <NavbarBrand href="/" className="mr-auto">REDUX FRIENDS</NavbarBrand>
+          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+          <Collapse isOpen={!this.state.collapsed} navbar>
+            <Nav  navbar>
+                <NavLink to="/">Home</NavLink>
+                <NavLink to="/protected">Friends</NavLink>
+                <NavLink to="/login">Login</NavLink>
+            </Nav>
+          </Collapse>
+        </Navbar>
       <Route path="/login" component={Login} />
-      <PrivateRoute path="/friendslist" component={FriendsList} />
 
+      <PrivateRoute exact path="/protected/" component={FriendsList} />
+      <PrivateRoute exact path="/protected/deletefriend" component={DeleteFriend} />
     </div>
   );
+  }
 }
 
-export default App;

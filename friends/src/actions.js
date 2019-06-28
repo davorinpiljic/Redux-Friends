@@ -11,6 +11,12 @@ export const login = (creds) => dispatch => {
     return axios
         .post('http://localhost:5000/api/login', creds)
         .then(response => localStorage.setItem('token', response.data.payload))
+        .catch(error => {
+            if(error.response.status === 403) {
+                localStorage.removeItem('token')
+            dispatch({type: GET_DATA_FAIL})
+            }
+        })
 }
 
 export const dataActions = () => dispatch => {
@@ -20,12 +26,17 @@ export const dataActions = () => dispatch => {
             headers: { authorization: localStorage.getItem('token')}
         })
         .then(response => {
-            dispatch({type: GET_DATA_SUCCESS, payload: JSON.stringify(response.data)})
+            dispatch({type: GET_DATA_SUCCESS, payload: response.data})
         })
         .catch(error => {
-            dispatch({type: GET_DATA_FAIL, payload: error.message})
+            dispatch({type: GET_DATA_FAIL, payload: error.msg})
         })
 }
 
+export const deleteFriend = (key) => dispatch => {
+    dispatch({type: GET_DATA_START})
+    axios 
+        .delete('http://localhost:5000/api/friends/')
+}
 // The login action creator should dispatch a "logging in" action, return the promise created by axios.post, then save the returned token to localStorage. You can connect your Login component, and show a spinner on your form or in your button while the login request is happening.
     

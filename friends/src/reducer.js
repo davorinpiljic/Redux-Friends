@@ -37,6 +37,7 @@ const friendReducer = (state = initialState, action) =>{
         case GET_DATA_FAIL: {
             return {
                 ...state,
+                isLoggingIn: false,
                 error: action.payload,
             }
         }

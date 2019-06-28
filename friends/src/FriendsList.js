@@ -1,6 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { dataActions } from './actions'
+import DeleteFriend from './DeleteFriend'
+import UpdateFriend from './UpdateFriend'
+import AddFriend from './AddFriend'
+import PrivateRoute from './PrivateRoute'
+
+import Loader from 'react-loader-spinner'
+
+import './App.css';
+import { Nav, NavItem, NavLink } from 'reactstrap';
+
 
 import { BrowserRouter as Route } from "react-router-dom";
 
@@ -16,19 +26,39 @@ class FriendsList extends React.Component {
     }
   
     render() {
+        if (this.props.isFetchingData) {return(
+            <Loader type="ThreeDots" color="red" height={80} width={80} />
+            )   
+        }
     return(
-        <div>
-            <h1>{this.props.friends}</h1>
+        <div >
+        <Nav>
+          <NavItem>
+            <NavLink to="/protected/addfriend">Add New Friend</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/protected/updatefriend">Update Existing Friend</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to="/protected/deletefriend">Delete Friend</NavLink>
+          </NavItem>
+
+        </Nav>
+            <h1 className="friends-list">{this.props.friends.map((friend, key) => {
+                return (
+                    <h4 key={key}>{friend.name}</h4>
+                )
+            })}</h1>
         </div>
     )       
     }
 
 }
-
 const mapState = state => {
     return {
         friends: state.friendReducer.friends,
-        isLoggingIn: state.friendReducer.isLoggingIn
+        isLoggingIn: state.friendReducer.isLoggingIn,
+        isFetchingData: state.friendReducer.isFetchingData,
     }
 }
 
