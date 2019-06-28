@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { dataActions, deleteFriend } from './actions'
+import { dataActions, deleteItem } from './actions'
 
 import './App.css';
 import { Badge } from 'reactstrap';
@@ -18,9 +18,11 @@ class DeleteFriend extends React.Component {
         this.props.dataActions()
       }
 
-    deleteFriend = (event, key) => {
+    deleteItem = (event, friend) => {
+        console.log(friend)
+
         event.preventDefault()
-        this.props.deleteFriend(key)
+        this.props.deleteItem(friend)
     }
   
     render() {
@@ -28,9 +30,9 @@ class DeleteFriend extends React.Component {
         <div >
            <h1 className="friends-list">{this.props.friends.map((friend, key) => {
                 return (
-                    <h4 key={key} onClick={element => this.deleteFriend(element, key)}>
+                    <h4 key={key} >
                         {friend.name}
-                        <Badge color="danger" size="sm">delete</Badge>
+                        <Badge onClick={(event) => this.deleteItem(event, friend)} color="danger" size="sm">delete</Badge>
                     </h4>
                 )
             })}</h1>
@@ -46,4 +48,4 @@ const mapState = state => {
     }
 }
 
-export default connect(mapState, {dataActions})(DeleteFriend)
+export default connect(mapState, {dataActions, deleteItem})(DeleteFriend)
