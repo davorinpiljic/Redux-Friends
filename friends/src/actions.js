@@ -6,6 +6,8 @@ export const GET_DATA_START = 'GET_DATA_START'
 export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS'
 export const GET_DATA_FAIL = 'GET_DATA_FAIL'
 export const UPDATE_START = 'UPDATE_START'
+export const UPDATE_END = 'END_START'
+
 export const FRIEND_SUBMIT = 'FRIEND_SUBMIT'
 
 
@@ -55,8 +57,21 @@ export const updateItem = (friend) => dispatch => {
 
 export const friendSubmit = (friend) => dispatch => {
     dispatch({type: GET_DATA_START})
+    dispatch({type: UPDATE_END})
         axios
         .put(`http://localhost:5000/api/friends/${friend.id}`, friend ,{ 
+            headers: { authorization: localStorage.getItem('token')}
+                })
+        .then(response => {
+            dispatch({type: GET_DATA_SUCCESS, payload: response.data})
+            })
+        .catch(error => alert(error))
+}
+
+export const addFriend = (friend) => dispatch => {
+    dispatch({type: GET_DATA_START})
+        axios
+        .post('http://localhost:5000/api/friends', friend ,{ 
             headers: { authorization: localStorage.getItem('token')}
                 })
         .then(response => {

@@ -7,7 +7,8 @@ import FriendsList from './FriendsList'
 import PrivateRoute from './PrivateRoute'
 import DeleteFriend from './DeleteFriend'
 import UpdateFriend from './UpdateFriend'
-import UpdateForm from './UpdateForm'
+import AddFriend from './AddFriend'
+
 
 
 
@@ -32,9 +33,9 @@ export default class App extends React.Component {
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav  navbar>
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/protected">Friends</NavLink>
-                <NavLink to="/login">Login</NavLink>
+                <Link to="/">Home</Link>
+                <Link to="/protected">Friends</Link>
+                <Link to="/login">Login</Link>
             </Nav>
           </Collapse>
         </Navbar>
@@ -43,7 +44,7 @@ export default class App extends React.Component {
       <PrivateRoute exact path="/protected/" component={FriendsList} />
       <PrivateRoute exact path="/protected/deletefriend" component={DeleteFriend} />
       <PrivateRoute exact path="/protected/updatefriend" component={UpdateFriend} />
-      <PrivateRoute exact path="/protected/updatefriend/updateform" component={UpdateForm} />
+      <PrivateRoute exact path="/protected/addfriend" component={AddFriend} />
 
     </div>
   );

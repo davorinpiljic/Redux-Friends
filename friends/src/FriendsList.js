@@ -7,12 +7,13 @@ import AddFriend from './AddFriend'
 import PrivateRoute from './PrivateRoute'
 
 import Loader from 'react-loader-spinner'
+import { Badge, Button, Form, FormGroup, Label, Input } from 'reactstrap'
 
 import './App.css';
 import { Nav, NavItem, NavLink } from 'reactstrap';
 
 
-import { BrowserRouter as Route } from "react-router-dom";
+import { BrowserRouter as Route, Link } from "react-router-dom";
 
 
 
@@ -34,13 +35,13 @@ class FriendsList extends React.Component {
         <div >
         <Nav>
           <NavItem>
-            <NavLink to="/protected/addfriend">Add New Friend</NavLink>
+            <Link to="/protected/addfriend">Add New Friend</Link>
           </NavItem>
           <NavItem>
-            <NavLink to="/protected/updatefriend">Update Existing Friend</NavLink>
+            <Link to="/protected/updatefriend">Update Existing Friend</Link>
           </NavItem>
           <NavItem>
-            <NavLink to="/protected/deletefriend">Delete Friend</NavLink>
+            <Link to="/protected/deletefriend">Delete Friend</Link>
           </NavItem>
 
         </Nav>

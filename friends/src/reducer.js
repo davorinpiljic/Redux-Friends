@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { LOGGING_IN, GET_DATA_START, GET_DATA_SUCCESS, GET_DATA_FAIL, UPDATE_START } from './actions'
+import { LOGGING_IN, UPDATE_END, GET_DATA_START, GET_DATA_SUCCESS, GET_DATA_FAIL, UPDATE_START, FRIEND_UPDATE } from './actions'
 
 
 const initialState = {
@@ -49,6 +49,16 @@ const friendReducer = (state = initialState, action) =>{
                 activeFriend: action.payload,
             }
         }
+        case UPDATE_END: {
+            return {
+                ...state,
+                updatingFriend: false,
+                activeFriend: [],
+
+            }
+        }
+        
+
         default: 
             return state;
         }
