@@ -5,6 +5,9 @@ export const LOGGING_IN = 'LOGGING_IN'
 export const GET_DATA_START = 'GET_DATA_START'
 export const GET_DATA_SUCCESS = 'GET_DATA_SUCCESS'
 export const GET_DATA_FAIL = 'GET_DATA_FAIL'
+export const UPDATE_START = 'UPDATE_START'
+export const FRIEND_SUBMIT = 'FRIEND_SUBMIT'
+
 
 export const login = (creds) => dispatch => {
     dispatch({type: LOGGING_IN})
@@ -36,13 +39,31 @@ export const dataActions = () => dispatch => {
 export const deleteItem = (friend) => dispatch => {
     dispatch({type: GET_DATA_START})
     axios
-    .delete(`http://localhost:5000/api/friends/${friend.id}`, { 
+        .delete(`http://localhost:5000/api/friends/${friend.id}`, { 
         headers: { authorization: localStorage.getItem('token')}
-    })
-    .then(response => {
-        dispatch({type: GET_DATA_SUCCESS, payload: response.data})
-    })
-    .catch(error => alert(error))
+            })
+        .then(response => {
+            dispatch({type: GET_DATA_SUCCESS, payload: response.data})
+            })
+        .catch(error => alert(error))
 }
+
+export const updateItem = (friend) => dispatch => {
+    dispatch({type:UPDATE_START, payload: friend} )
+
+}
+
+export const friendSubmit = (friend) => dispatch => {
+    dispatch({type: GET_DATA_START})
+        axios
+        .put(`http://localhost:5000/api/friends/${friend.id}`, friend ,{ 
+            headers: { authorization: localStorage.getItem('token')}
+                })
+        .then(response => {
+            dispatch({type: GET_DATA_SUCCESS, payload: response.data})
+            })
+        .catch(error => alert(error))
+}
+
 // The login action creator should dispatch a "logging in" action, return the promise created by axios.post, then save the returned token to localStorage. You can connect your Login component, and show a spinner on your form or in your button while the login request is happening.
     

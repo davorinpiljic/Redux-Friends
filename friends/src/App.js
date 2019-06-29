@@ -6,6 +6,10 @@ import Login from './Login'
 import FriendsList from './FriendsList'
 import PrivateRoute from './PrivateRoute'
 import DeleteFriend from './DeleteFriend'
+import UpdateFriend from './UpdateFriend'
+import UpdateForm from './UpdateForm'
+
+
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
@@ -23,7 +27,7 @@ export default class App extends React.Component {
   render() {
   return (
     <div className="App">
-        <Navbar color="danger" light>
+        <Navbar color="warning" light>
           <NavbarBrand href="/" className="mr-auto">REDUX FRIENDS</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
@@ -38,6 +42,9 @@ export default class App extends React.Component {
 
       <PrivateRoute exact path="/protected/" component={FriendsList} />
       <PrivateRoute exact path="/protected/deletefriend" component={DeleteFriend} />
+      <PrivateRoute exact path="/protected/updatefriend" component={UpdateFriend} />
+      <PrivateRoute exact path="/protected/updatefriend/updateform" component={UpdateForm} />
+
     </div>
   );
   }
