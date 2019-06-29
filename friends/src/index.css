@@ -7,6 +7,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: white;
   background-color: black;
+
+  background-image: url("https://img.freepik.com/free-photo/diverse-friends-students-shoot_53876-47012.jpg?size=626&ext=jpg");
+
 }
 
 code {
